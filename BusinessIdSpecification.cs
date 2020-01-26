@@ -8,19 +8,32 @@ namespace BusinessIdSpecification
     {
         public IEnumerable<string> ReasonsForDissatisfaction => throw new NotImplementedException();
 
+        private List<string> _listOfFailures = new List<string>();
+
+        IEnumerable<string> ISpecification<string>.ReasonsForDissatisfaction => throw new NotImplementedException();
+
         static void Main()
         {
+            
 
         }
 
         /// <summary>
         /// Check if string is in business ID format. 7 Digits followed by a dash and a control mark. 
-        /// Link to YTJ, business information system specifications of a <a href="https://www.ytj.fi/en/index/businessid.html">Business ID</a>
+        /// Link to YTJ, business information system specifications of a <a href="https://www.ytj.fi/en/index/businessid.html">Business ID</a>.
+        /// Matching is done with regex. ReasonsForDissatisfaction will contain reasons for failure
         /// </summary>
         /// <param name="bId">String to check</param>
         /// <returns></returns>
         public bool IsSatisfiedBy(string bId)
         {
+
+            if(bId == null)
+            {
+                _listOfFailures.Add("No value provided");
+                return false;
+            }
+
             //Regex check
             var match = Regex.Match(bId, @"^[\d]{7}-[\d]$");
 
