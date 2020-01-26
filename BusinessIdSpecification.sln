@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessIdSpecification", "BusinessIdSpecification.csproj", "{2FF786E4-76BF-4E95-AEBF-2E2890775B19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinesssIdSpecUnitTests", "..\BusinesssIdSpecUnitTests\BusinesssIdSpecUnitTests.csproj", "{D99AF055-1B03-41F7-A8F3-FA8021676CF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinesssIdSpecUnitTests", "BusinesssIdSpecUnitTests\BusinesssIdSpecUnitTests.csproj", "{D99AF055-1B03-41F7-A8F3-FA8021676CF6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2FF786E4-76BF-4E95-AEBF-2E2890775B19} = {2FF786E4-76BF-4E95-AEBF-2E2890775B19}
 	EndProjectSection
