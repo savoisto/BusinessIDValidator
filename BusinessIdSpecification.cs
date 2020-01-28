@@ -6,11 +6,8 @@ namespace BusinessIdSpecification
 {
     public class BusinessIdSpecification : ISpecification<string>
     {
-        public IEnumerable<string> ReasonsForDissatisfaction => throw new NotImplementedException();
-
-        private List<string> _listOfFailures = new List<string>();
-
-        IEnumerable<string> ISpecification<string>.ReasonsForDissatisfaction => throw new NotImplementedException();
+        public IEnumerable<string> ReasonsForDissatisfaction => _listOfFails;
+        private List<string> _listOfFails = new List<string>();
 
         static void Main()
         {
@@ -30,7 +27,7 @@ namespace BusinessIdSpecification
 
             if(bId == null)
             {
-                _listOfFailures.Add("No value provided");
+                _listOfFails.Add("No value provided");
                 return false;
             }
 
@@ -38,7 +35,6 @@ namespace BusinessIdSpecification
             var match = Regex.Match(bId, @"^[\d]{7}-[\d]$");
 
             //TODO: Reason for dissatisfaction
-
             return match.Success;
         }
     }

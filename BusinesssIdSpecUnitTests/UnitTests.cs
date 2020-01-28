@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessIdSpecification;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinesssIdSpecUnitTests
 {
@@ -7,13 +8,20 @@ namespace BusinesssIdSpecUnitTests
     public class UnitTests
     {
 
+        private List<string> getReasonList(BusinessIdSpecification.BusinessIdSpecification BIClass)
+        {
+
+            List<string> reasonList = BIClass.ReasonsForDissatisfaction.ToList();
+            return reasonList;
+        }
+
         [TestMethod]
         public void SimpleIsSatisfiedFailsTest() {
             // Arrange
             string BID = "1234657-1324423";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
 
             // Act & Assert 
-            var b = new BusinessIdSpecification.BusinessIdSpecification();
             Assert.IsFalse(b.IsSatisfiedBy(BID));
         }
 
@@ -22,9 +30,9 @@ namespace BusinesssIdSpecUnitTests
         {
             // Arrange
             string BID = "1234657-1";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
 
             // Act & Assert 
-            var b = new BusinessIdSpecification.BusinessIdSpecification();
             Assert.IsTrue(b.IsSatisfiedBy(BID));
         }
 
@@ -33,9 +41,9 @@ namespace BusinesssIdSpecUnitTests
         {
             // Arrange
             string BID = "";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
 
             // Act & Assert 
-            var b = new BusinessIdSpecification.BusinessIdSpecification();
             Assert.IsFalse(b.IsSatisfiedBy(BID));
         }
 
@@ -44,10 +52,23 @@ namespace BusinesssIdSpecUnitTests
         {
             // Arrange
             string BID = null;
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
 
             // Act & Assert 
-            var b = new BusinessIdSpecification.BusinessIdSpecification();
             Assert.IsFalse(b.IsSatisfiedBy(BID));
+        }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithNullData()
+        {
+            // Arrange
+            string BID = null;
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+            
+            // Assert
+            Assert.AreEqual("No value provided", getReasonList(b)[0]);
         }
     }
 }
