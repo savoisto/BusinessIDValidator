@@ -70,5 +70,84 @@ namespace BusinesssIdSpecUnitTests
             // Assert
             Assert.AreEqual("No value provided", getReasonList(b)[0]);
         }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithTooShortData()
+        {
+            // Arrange
+            string BID = "1234-4";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+
+            // Assert
+            Assert.AreEqual("Value too short", getReasonList(b)[0]);
+        }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithTooLongData()
+        {
+            // Arrange
+            string BID = "1234234234234-4";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+
+            // Assert
+            Assert.AreEqual("Value too long", getReasonList(b)[0]);
+        }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithNonNumericalValues()
+        {
+            // Arrange
+            string BID = "1234s6d-5";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+
+            // Assert
+            Assert.AreEqual("ID or the control mark contains non numeric values", getReasonList(b)[0]);
+        }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithIncorrectFormatting()
+        {
+            // Arrange
+            string BID = "123456-52";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+
+            // Assert
+            Assert.AreEqual("Value formatting is incorrect", getReasonList(b)[0]);
+        }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithIncorrectFormattingTooManyDashes()
+        {
+            // Arrange
+            string BID = "12-456-52";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+
+            // Assert
+            Assert.AreEqual("Value formatting is incorrect", getReasonList(b)[0]);
+        }
+        [TestMethod]
+        public void ReasonForDissatisfactionWithIncorrectFormattingTooManyDashes2()
+        {
+            // Arrange
+            string BID = "---------";
+            var b = new BusinessIdSpecification.BusinessIdSpecification();
+
+            // Act
+            b.IsSatisfiedBy(BID);
+
+            // Assert
+            Assert.AreEqual("ID or the control mark contains non numeric values", getReasonList(b)[0]);
+            Assert.AreEqual("Value formatting is incorrect", getReasonList(b)[1]);
+        }
     }
 }
