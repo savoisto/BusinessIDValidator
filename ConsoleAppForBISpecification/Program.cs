@@ -8,32 +8,43 @@ namespace ConsoleAppForBISpecification
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter Business ID to validate: ");
-            var bId = Console.ReadLine();
-            BusinessIdSpecification.BusinessIdSpecification bIdValidator = new BusinessIdSpecification.BusinessIdSpecification();
-            bool success = bIdValidator.IsSatisfiedBy(bId);
-
-            string validStatusString = "";
-            if (success)
+            bool cont = true;
+            while (cont)
             {
-                validStatusString = "valid";
-            }
-            else
-            {
-                validStatusString = "not valid";
-            }
+                Console.WriteLine("Enter Business ID to validate or enter 0 to exit the app: ");
+                var bId = Console.ReadLine();
 
-
-            Console.WriteLine("Provided business ID was " + validStatusString);
-
-            if(!success)
-            {
-                using (IEnumerator<string> iterator = bIdValidator.ReasonsForDissatisfaction.GetEnumerator())
+                if(bId == "0")
                 {
-                    Console.WriteLine("Reason for failure: ");
-                    while (iterator.MoveNext())
+                    cont = false;
+                    Console.Write("Exitting application");
+                    Environment.Exit(0);
+                }
+
+                BusinessIdSpecification.BusinessIdSpecification bIdValidator = new BusinessIdSpecification.BusinessIdSpecification();
+                bool success = bIdValidator.IsSatisfiedBy(bId);
+                string validStatusString = "";
+                if (success)
+                {
+                    validStatusString = "valid";
+                }
+                else
+                {
+                    validStatusString = "not valid";
+                }
+
+
+                Console.WriteLine("Provided business ID was " + validStatusString);
+
+                if (!success)
+                {
+                    using (IEnumerator<string> iterator = bIdValidator.ReasonsForDissatisfaction.GetEnumerator())
                     {
-                        Console.WriteLine(iterator.Current.ToString());
+                        Console.WriteLine("Reason for failure: ");
+                        while (iterator.MoveNext())
+                        {
+                            Console.WriteLine(iterator.Current.ToString());
+                        }
                     }
                 }
             }
