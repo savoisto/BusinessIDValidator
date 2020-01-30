@@ -86,6 +86,7 @@ namespace BusinessIdSpecification
                 }
             }
 
+            //Unforeseen error occured
             if(_listOfFails.Count == 0)
             {
                 _listOfFails.Add("Value validation failed for an unknown reason");
